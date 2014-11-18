@@ -28,7 +28,7 @@
 
     @include('users._permissions')
 
-    <div class="col-sm-offset-3">
+    <div class="col-sm-offset-3 col-sm-4">
         
         {{ Form::submit('Create user', array ('class' => 'btn btn-primary')) }} 
 

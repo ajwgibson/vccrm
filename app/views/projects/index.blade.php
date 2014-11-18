@@ -8,6 +8,7 @@
 		<tr>
 			<th>Name</th>
 			<th>Leader</th>
+			<th>Roles</th>
 			<th>Options</th>
 		</tr>
 	</thead>
@@ -16,6 +17,12 @@
 		<tr>
 			<td>{{{ $project->name }}}</td>
 			<td>{{{ $project->leader }}}</td>
+			<td>
+				@foreach ($project->roles()->orderBy('name')->get() as $role)
+				{{{ $role->name }}} 
+				<br/>
+				@endforeach
+			</td>
 			<td>{{ link_to_route(
 					'project.show', 
 					'Show details', 

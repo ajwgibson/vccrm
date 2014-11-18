@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="col-sm-offset-2">
+    <div class="col-sm-offset-2 col-sm-4">
         {{ Form::submit('Login', array ('class' => 'btn btn-primary')) }} 
     </div>
 

@@ -11,4 +11,10 @@ class Project extends Eloquent {
 		'leader' => 'required|max:100',
 	);
 
+
+	// Relationship: roles
+	public function roles()
+    {
+        return $this->hasMany('ProjectRole');
+    }
 }

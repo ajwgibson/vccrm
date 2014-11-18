@@ -48,6 +48,46 @@
 
 </div>
 
+<div class="col-sm-12">
+    <h2>Roles</h2>
+    
+    <div>
+        {{ link_to_route(
+                'project_role.create', 
+                'Add a new role', 
+                array($project->id), 
+                array('class' => 'btn btn-primary')) }}
+    </div>
+
+    <table class="table table-striped table-bordered table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Typical attendance</th>
+                <th>Volunteer?</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($project->roles->sortBy('name') as $role)
+                <tr>
+                    <td>{{{ $role->name }}}</td>
+                    <td>{{{ number_format($role->hours, 2) . ' hrs' }}}</td>
+                    <td>{{{ $role->volunteer ? 'Yes' : 'No' }}}</td>
+                    <td>
+                        {{ link_to_route(
+                            'project_role.show', 
+                            'View details', 
+                            array($role->id), 
+                            array('class' => '')) }}
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

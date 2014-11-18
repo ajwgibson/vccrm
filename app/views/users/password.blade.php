@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="col-sm-offset-2">
+    <div class="col-sm-offset-2 col-sm-4">
         
         {{ Form::submit('Change password', array ('class' => 'btn btn-primary')) }} 
 
