@@ -1,0 +1,17 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 1
+
+authorize: C:\Users\alan\.ssh\id_rsa.pub
+
+keys:
+    - C:\Users\alan\.ssh\id_rsa
+
+folders:
+    - map: .
+      to: /home/vagrant/vccrm
+
+sites:
+    - map: vccrm.app
+      to: /home/vagrant/vccrm/public

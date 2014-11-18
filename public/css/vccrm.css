@@ -1,0 +1,55 @@
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+label.required:before,
+p.required-warning:before,
+th span.required:before {
+    content: "* ";
+    font-weight: bold;
+}
+
+p.required-warning {
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.table,
+.table-responsive {
+    margin-top: 10px;
+}
+
+.table-nested {
+  margin-top: 0px !important;
+}
+
+fieldset {
+  margin-bottom: 30px;
+}
+
+dd {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.subtitle small {
+  color: #428bca !important;
+}
+
+.filter .panel {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
