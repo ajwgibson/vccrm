@@ -50,6 +50,9 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                     @if (Sentry::check())
+                        @if (Sentry::hasAccess('contact.*'))
+                            <li class="{{ strpos(Route::currentRouteName(), 'contact') === 0 ? 'active' : '' }}">{{ link_to_route('contact.index', 'Contacts') }}</li>
+                        @endif
                         @if (Sentry::hasAccess('project.*'))
                             <li class="{{ strpos(Route::currentRouteName(), 'project') === 0 ? 'active' : '' }}">{{ link_to_route('project.index', 'Projects') }}</li>
                         @endif

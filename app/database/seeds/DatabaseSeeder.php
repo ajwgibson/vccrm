@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SentrySeeder');
 
 		$this->call('ProjectSeeder');
+		$this->call('ContactSeeder');
 	}
 
 }

@@ -32,6 +32,9 @@ Route::group(array('before' => 'sentry'), function()
     Route::get('project_role/{id}/edit',        array('as' => 'project_role.edit',    'uses' => 'ProjectRoleController@edit'));
     Route::post('project_role/{id}/update',     array('as' => 'project_role.update',  'uses' => 'ProjectRoleController@update'));
     Route::delete('project_role/{id}/destroy',  array('as' => 'project_role.destroy', 'uses' => 'ProjectRoleController@destroy'));
+
+    // Contact administration
+    Route::resource('contact', 'ContactController');
 });
 
 
