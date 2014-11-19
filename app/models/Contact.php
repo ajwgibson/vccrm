@@ -20,4 +20,12 @@ class Contact extends Eloquent {
 		'gender'                   => 'max:10',
 	);
 
+
+	// Retrieve dates as eloquent objects
+	public function getDates()
+    {
+        $dates = parent::getDates();
+        array_push($dates, 'date_of_birth');
+        return $dates;
+    }
 }
