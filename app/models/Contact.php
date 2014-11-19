@@ -48,4 +48,10 @@ class Contact extends Eloquent {
     {
     	return trim("{$this->first_name} {$this->last_name}");
     }
+
+    // Is this contact a volunteer?
+    public function getVolunteerAttribute()
+    {
+    	return $this->volunteer_details !== null;
+    }
 }
