@@ -6,6 +6,12 @@ class Contact extends Eloquent {
 
 	protected $guarded = array('id');
 
+
+	// Eager loading
+    protected $with = array('volunteer_details');
+
+
+    // Validation rules
 	public static $rules = array(
 		'first_name'               => 'required|max:50',
 		'last_name'                => 'required|max:50',
@@ -27,5 +33,19 @@ class Contact extends Eloquent {
         $dates = parent::getDates();
         array_push($dates, 'date_of_birth');
         return $dates;
+    }
+
+
+    // Relationship: volunteer_details
+	public function volunteer_details()
+    {
+        return $this->hasOne('VolunteerDetails');
+    }
+
+
+    // Combine first and last name for this contact
+    public function getNameAttribute()
+    {
+    	return trim("{$this->first_name} {$this->last_name}");
     }
 }

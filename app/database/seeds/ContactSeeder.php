@@ -25,6 +25,26 @@ class ContactSeeder extends Seeder {
 				'date_of_birth'			   => '1971-04-10',
 				'gender'                   => 'Male',
 			));
+		$contact->volunteer_details()->save(
+			new VolunteerDetails(
+				array(
+					'next_of_kin_name'           => 'Sue',
+					'next_of_kin_telephone'      => '12345',
+					'next_of_kin_relationship'   => 'Wife',
+					'emergency_name'		     => 'Also Sue',
+					'emergency_telephone'        => '98765',
+					'emergency_relationship'     => 'Still wife',
+					'health_issues'              => true,
+					'health_issues_details'      => 'Personal',
+					'personal_development_notes' => 'Wants some training',
+					'access_ni_required'         => true,
+					'access_ni_received'         => true,
+					'confidentiality'            => true,
+					'photographs'                => true,
+					'health_and_safety'          => true,
+					'safeguarding'               => true,
+					'notes'                      => 'Some note here'
+				)));
 
 		$contact = Contact::create(
 			array(

@@ -18,8 +18,8 @@ code {
 label.required:before,
 p.required-warning:before,
 th span.required:before {
-    content: "* ";
-    font-weight: bold;
+  content: "* ";
+  font-weight: bold;
 }
 
 p.required-warning {
@@ -52,4 +52,14 @@ dd {
 .filter .panel {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.show-label {
+  font-weight: bold;
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+h3 {
+  border-bottom: 1px solid #eee;
 }

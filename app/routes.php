@@ -35,6 +35,13 @@ Route::group(array('before' => 'sentry'), function()
 
     // Contact administration
     Route::resource('contact', 'ContactController');
+
+    // Volunteer Details
+    Route::get('volunteer_details/{id}/create',     array('as' => 'volunteer_details.create',  'uses' => 'VolunteerDetailsController@create'));
+    Route::post('volunteer_details/{id}/store',     array('as' => 'volunteer_details.store',   'uses' => 'VolunteerDetailsController@store'));
+    Route::get('volunteer_details/{id}/edit',       array('as' => 'volunteer_details.edit',    'uses' => 'VolunteerDetailsController@edit'));
+    Route::post('volunteer_details/{id}/update',    array('as' => 'volunteer_details.update',  'uses' => 'VolunteerDetailsController@update'));
+    Route::delete('volunteer_details/{id}/destroy', array('as' => 'volunteer_details.destroy', 'uses' => 'VolunteerDetailsController@destroy'));
 });
 
 
