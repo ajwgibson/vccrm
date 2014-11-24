@@ -17,4 +17,10 @@ class Project extends Eloquent {
     {
         return $this->hasMany('ProjectRole');
     }
+
+	// Relationship
+    public function attendance_records()
+    {
+        return $this->hasMany('AttendanceRecord');
+    }
 }

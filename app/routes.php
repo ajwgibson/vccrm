@@ -42,6 +42,12 @@ Route::group(array('before' => 'sentry'), function()
     Route::get('volunteer_details/{id}/edit',       array('as' => 'volunteer_details.edit',    'uses' => 'VolunteerDetailsController@edit'));
     Route::post('volunteer_details/{id}/update',    array('as' => 'volunteer_details.update',  'uses' => 'VolunteerDetailsController@update'));
     Route::delete('volunteer_details/{id}/destroy', array('as' => 'volunteer_details.destroy', 'uses' => 'VolunteerDetailsController@destroy'));
+
+    // Attendance record pages
+    Route::post('attendance_record/filter',     array('as' => 'attendance_record.filter', 'uses' => 'AttendanceRecordController@filter'));
+    Route::get('attendance_record/resetfilter', array('as' => 'attendance_record.resetfilter', 'uses' => 'AttendanceRecordController@resetFilter'));
+    Route::get('attendance_record/export',     array('as' => 'attendance_record.export', 'uses' => 'AttendanceRecordController@export'));
+    Route::resource('attendance_record', 'AttendanceRecordController');
 });
 
 

@@ -43,6 +43,13 @@ class Contact extends Eloquent {
     }
 
 
+    // Relationship: attendance_records
+    public function attendance_records()
+    {
+        return $this->hasMany('AttendanceRecord');
+    }
+
+
     // Combine first and last name for this contact
     public function getNameAttribute()
     {
