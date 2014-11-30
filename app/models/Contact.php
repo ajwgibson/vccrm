@@ -50,15 +50,30 @@ class Contact extends Eloquent {
     }
 
 
+    // Relationship: connection_cards
+    public function connection_cards()
+    {
+        return $this->hasMany('ConnectionCard');
+    }
+    
+
     // Combine first and last name for this contact
     public function getNameAttribute()
     {
     	return trim("{$this->first_name} {$this->last_name}");
     }
 
+
     // Is this contact a volunteer?
     public function getVolunteerAttribute()
     {
     	return $this->volunteer_details !== null;
+    }
+
+
+    // Is this contact a guest?
+    public function getGuestAttribute()
+    {
+        return $this->connection_cards()->count() > 0;
     }
 }

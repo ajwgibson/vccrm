@@ -45,7 +45,7 @@
     </div>
 
     <div class="form-group">
-        <div class="col-sm-offset-2">
+        <div class="col-sm-offset-2 col-sm-4">
             {{ Form::submit('Update this attendance record', array ('class' => 'btn btn-primary')) }} 
         </div>
     </div>

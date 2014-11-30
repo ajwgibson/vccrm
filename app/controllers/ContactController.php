@@ -73,7 +73,7 @@ class ContactController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$contact = Contact::findOrFail($id);
+		$contact = Contact::with('connection_cards')->findOrFail($id);
 
 		$this->layout->with('title', $this->title);
         $this->layout->with('subtitle', "details for {$contact->first_name} {$contact->last_name}");

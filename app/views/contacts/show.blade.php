@@ -206,6 +206,51 @@
 </div>
 
 
+<div class="col-sm-12">
+    
+    <h3>Guest connection cards</h3>
+
+@if ($contact->connection_cards->count() > 0)
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Project</th>
+                <th>Connection date</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($contact->connection_cards as $connection_card)
+            <tr>
+                <td>{{{ $connection_card->project->name }}}</td>
+                <td>{{{ $connection_card->connection_date ? $connection_card->connection_date->format('Y-m-d') : '' }}}</td>
+                <td>{{ link_to_route(
+                        'connection_card.show', 
+                        'Show details', 
+                        $parameters = array( 'id' => $connection_card->id), 
+                        $attributes = array( 'class' => '')) }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+@endif
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{ link_to_route(
+                'connection_card.create', 
+                'Add a guest connection card', 
+                $parameters = array( 'id' => $contact->id), 
+                $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+        </div>
+    </div>
+
+
+</div>
+
+
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

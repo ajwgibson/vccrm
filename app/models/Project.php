@@ -23,4 +23,10 @@ class Project extends Eloquent {
     {
         return $this->hasMany('AttendanceRecord');
     }
+
+    // Relationship: connection_cards
+    public function connection_cards()
+    {
+        return $this->hasMany('ConnectionCard');
+    }
 }

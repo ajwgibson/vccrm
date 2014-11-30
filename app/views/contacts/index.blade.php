@@ -11,6 +11,7 @@
 			<th>Mobile</th>
 			<th>Telephone</th>
 			<th>Volunteer?</th>
+			<th>Guest?</th>
 			<th>Options</th>
 		</tr>
 	</thead>
@@ -22,6 +23,7 @@
 			<td>{{{ $contact->mobile }}}</td>
 			<td>{{{ $contact->telephone }}}</td>
 			<td>{{{ $contact->volunteer ? 'Yes' : 'No' }}}</td>
+			<td>{{{ $contact->guest ? 'Yes' : 'No' }}}</td>
 			<td>{{ link_to_route(
 					'contact.show', 
 					'Show details', 

@@ -53,7 +53,7 @@
     </div>
 
     <div class="form-group">
-        <div class="col-sm-offset-2">
+        <div class="col-sm-offset-2 col-sm-4">
             {{ Form::submit('Create a new attendance record', array ('class' => 'btn btn-primary')) }} 
         </div>
     </div>
