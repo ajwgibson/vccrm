@@ -11,15 +11,80 @@ class ContactController extends \BaseController {
 	 */
 	public function index()
 	{
-		$contacts = Contact::orderBy('first_name')->orderBy('last_name')->paginate(20);
+		$contacts = Contact::orderBy('first_name')->orderBy('last_name');
+
+		$filtered = false;
+		$filter_name      = Session::get('contact_filter_name',      '');
+        $filter_guest     = Session::get('contact_filter_guest',     '');
+        $filter_volunteer = Session::get('contact_filter_volunteer', '');
+
+        if (!(empty($filter_name))) {
+            $contacts = $contacts
+                ->where(function($query) use($filter_name) {
+                    $query->where('contacts.first_name', 'LIKE', "%$filter_name%")
+                          ->orWhere('contacts.last_name', 'LIKE', "%$filter_name%");
+                });	
+            $filtered = true;
+        }
+
+        if (!(empty($filter_guest))) {
+            $contacts = $contacts->has('connection_cards');
+            $filtered = true;
+        }
+
+        if (!(empty($filter_volunteer))) {
+            $contacts = $contacts->has('volunteer_details');
+            $filtered = true;
+        }
+
+		$contacts = $contacts->paginate(20);
 
         $this->layout->with('title', $this->title);
         $this->layout->with('subtitle', 'show all contacts');
 
         $this->layout->content =
             View::make('contacts.index')
-                    ->with('contacts', $contacts);
+                    ->with('contacts', $contacts)
+                    ->with('filtered', $filtered)
+                    ->with('filter_name', $filter_name)
+                    ->with('filter_guest', $filter_guest)
+                    ->with('filter_volunteer', $filter_volunteer);
 	}
+
+	
+	/**
+     * Changes the list filter values in the session
+     * and redirects back to the index to force the filtered
+     * list to be displayed.
+     */
+    public function filter()
+    {
+        $filter_name      = Input::get('filter_name');
+        $filter_guest     = Input::get('filter_guest');
+        $filter_volunteer = Input::get('filter_volunteer');
+        
+        Session::put('contact_filter_name',      $filter_name);
+        Session::put('contact_filter_guest',     $filter_guest);
+        Session::put('contact_filter_volunteer', $filter_volunteer);
+
+        return Redirect::route('contact.index');
+    }
+
+	
+	/**
+     * Removes the list filter values from the session
+     * and redirects back to the index to force the 
+     * list to be displayed.
+     */
+    public function resetFilter()
+    {
+        if (Session::has('contact_filter_name'))      Session::forget('contact_filter_name');
+        if (Session::has('contact_filter_guest'))     Session::forget('contact_filter_guest');
+        if (Session::has('contact_filter_volunteer')) Session::forget('contact_filter_volunteer');
+
+        return Redirect::route('contact.index');
+    }
+
 
 	/**
 	 * Show the form for creating a new resource.

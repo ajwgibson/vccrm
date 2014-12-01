@@ -34,6 +34,8 @@ Route::group(array('before' => 'sentry'), function()
     Route::delete('project_role/{id}/destroy',  array('as' => 'project_role.destroy', 'uses' => 'ProjectRoleController@destroy'));
 
     // Contact administration
+    Route::post('contact/filter',     array('as' => 'contact.filter',      'uses' => 'ContactController@filter'));
+    Route::get('contact/resetfilter', array('as' => 'contact.resetfilter', 'uses' => 'ContactController@resetFilter'));
     Route::resource('contact', 'ContactController');
 
     // Volunteer Details
