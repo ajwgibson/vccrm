@@ -113,6 +113,8 @@ class ContactController extends \BaseController {
 	{
 		$input = Input::all();
 
+        if (!$input['date_of_birth']) $input = array_except($input, array('date_of_birth'));
+
         $validator = 
             Validator::make(
                 $input, 
@@ -177,6 +179,8 @@ class ContactController extends \BaseController {
 	{
 		$input = Input::all();
 
+        if (!$input['date_of_birth']) $input = array_except($input, array('date_of_birth'));
+        
         $validator = 
             Validator::make(
                 $input, 
