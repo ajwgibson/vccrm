@@ -14,8 +14,11 @@ class AttendanceRecordController extends \BaseController {
         $filtered = false;
         $canExport = false;
 
-        $filter_project = Session::get('attendance_record_filter_project',   '');
-        $filter_contact = Session::get('attendance_record_filter_contact',   '');
+        $filter_project   = Session::get('attendance_record_filter_project',   '');
+        $filter_contact   = Session::get('attendance_record_filter_contact',   '');
+        $filter_name      = Session::get('attendance_record_filter_name',      '');
+        $filter_guest     = Session::get('attendance_record_filter_guest',     '');
+        $filter_volunteer = Session::get('attendance_record_filter_volunteer', '');
 
 		$user = Sentry::getUser();
 		$admin = Sentry::findGroupByName('Attendance Administration');
@@ -37,6 +40,26 @@ class AttendanceRecordController extends \BaseController {
             $filtered = true;
         }
 
+        if (!(empty($filter_name))) {
+        	$records = $records->join('contacts', 'attendance_records.contact_id', '=', 'contacts.id');
+            $records = $records
+                ->where(function($query) use($filter_name) {
+                    $query->where('contacts.first_name', 'LIKE', "%$filter_name%")
+                          ->orWhere('contacts.last_name', 'LIKE', "%$filter_name%");
+                });	
+            $filtered = true;
+        }
+
+        if (!(empty($filter_guest))) {
+            $records = $records->where('volunteer', false);
+            $filtered = true;
+        }
+
+        if (!(empty($filter_volunteer))) {
+            $records = $records->where('volunteer', true);
+            $filtered = true;
+        }
+
         $records = $records->paginate(50);
 
         $this->layout->with('title', $this->title);
@@ -53,6 +76,9 @@ class AttendanceRecordController extends \BaseController {
                     ->with('contacts', $contacts)
                     ->with('filter_project', $filter_project)
                     ->with('filter_contact', $filter_contact)
+                    ->with('filter_name', $filter_name)
+                    ->with('filter_guest', $filter_guest)
+                    ->with('filter_volunteer', $filter_volunteer)
                     ->with('filtered', $filtered)
                     ->with('canExport', $canExport);
 	}
@@ -64,11 +90,17 @@ class AttendanceRecordController extends \BaseController {
      */
     public function filter()
     {
-        $filter_project  = Input::get('filter_project');
-        $filter_contact  = Input::get('filter_contact');
+        $filter_project   = Input::get('filter_project');
+        $filter_contact   = Input::get('filter_contact');
+        $filter_name      = Input::get('filter_name');
+        $filter_guest     = Input::get('filter_guest');
+        $filter_volunteer = Input::get('filter_volunteer');
         
         Session::put('attendance_record_filter_project',    $filter_project);
         Session::put('attendance_record_filter_contact',    $filter_contact);
+        Session::put('attendance_record_filter_name',       $filter_name);
+        Session::put('attendance_record_filter_guest',      $filter_guest);
+        Session::put('attendance_record_filter_volunteer',  $filter_volunteer);
 
         return Redirect::route('attendance_record.index');
     }
@@ -80,8 +112,11 @@ class AttendanceRecordController extends \BaseController {
      */
     public function resetFilter()
     {
-        if (Session::has('attendance_record_filter_project'))  Session::forget('attendance_record_filter_project');
-        if (Session::has('attendance_record_filter_contact'))  Session::forget('attendance_record_filter_contact');
+        if (Session::has('attendance_record_filter_project'))   Session::forget('attendance_record_filter_project');
+        if (Session::has('attendance_record_filter_contact'))   Session::forget('attendance_record_filter_contact');
+        if (Session::has('attendance_record_filter_name'))      Session::forget('attendance_record_filter_name');
+        if (Session::has('attendance_record_filter_guest'))     Session::forget('attendance_record_filter_guest');
+        if (Session::has('attendance_record_filter_volunteer')) Session::forget('attendance_record_filter_volunteer');
 
         return Redirect::route('attendance_record.index');
     }

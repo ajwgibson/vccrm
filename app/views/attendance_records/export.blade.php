@@ -1,4 +1,4 @@
-"Project","Contact","Attendance Date","Hours","Role","Volunteer?"
+"Project","Contact","Attendance Date","Hours","Role","Volunteer or Guest"
 @foreach($records as $record)
 "{{ 
     $record->project->name 
@@ -11,6 +11,6 @@
 }}","{{ 
     $record->role 
 }}","{{ 
-    $record->volunteer ? 'Yes' : 'No' 
+    $record->volunteer ? 'Volunteer' : 'Guest' 
 }}"
 @endforeach
