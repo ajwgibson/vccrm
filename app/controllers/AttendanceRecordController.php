@@ -159,7 +159,7 @@ class AttendanceRecordController extends \BaseController {
     	if (!($contact_ids)) $contact_ids = array ( '' );
 
     	$role_name = null;
-    	$volunteer = false;
+    	$volunteer = true;
 
     	if (Input::has('role_id')) {
     		$role = ProjectRole::find(Input::get('role_id'));
