@@ -145,4 +145,15 @@ class ProjectController extends \BaseController {
 	}
 
 
+	/**
+	 * Returns a list of roles for a given project.
+	 *
+	 * @param  int  $id
+	 * @return JSON Response
+	 */
+	public function roles($id)
+	{
+		$roles = ProjectRole::where('project_id', $id)->get();
+		return $roles;
+	}
 }

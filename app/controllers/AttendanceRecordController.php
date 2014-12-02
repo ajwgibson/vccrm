@@ -121,8 +121,18 @@ class AttendanceRecordController extends \BaseController {
     	$user = Sentry::getUser();
 
     	$contact_ids = Input::get('contact_id');
-
     	if (!($contact_ids)) $contact_ids = array ( '' );
+
+    	$role_name = null;
+    	$volunteer = false;
+
+    	if (Input::has('role_id')) {
+    		$role = ProjectRole::find(Input::get('role_id'));
+    		if ($role) {
+    			$role_name = $role->name;
+    			$volunteer = $role->volunteer;
+    		}
+    	}
 
     	foreach ($contact_ids as $contact_id) {
         	
@@ -131,7 +141,9 @@ class AttendanceRecordController extends \BaseController {
 	            	'contact_id'      => $contact_id,
 	            	'attendance_date' => Input::get('attendance_date'),
 	            	'hours'           => Input::get('hours'),
-	            	'user_id'         => $user->id
+	            	'user_id'         => $user->id,
+	            	'role'            => $role_name,
+	            	'volunteer'       => $volunteer
             	);
 
         	$validator = 
@@ -202,6 +214,12 @@ class AttendanceRecordController extends \BaseController {
 		$contacts = Contact::orderby('first_name')->orderby('last_name')->get();
 		$contacts = $contacts->lists('Name', 'id');
 
+		$role_id = -1;
+		$role = $record->project->roles()->where('name', $record->role)->first();
+		if ($role) {
+			$role_id = $role->id;
+		}
+
         $this->layout->with('title', $this->title);
         $this->layout->with('subtitle', 'edit attendance record details');
 
@@ -209,7 +227,8 @@ class AttendanceRecordController extends \BaseController {
             View::make('attendance_records.edit')
                     ->with('record', $record)
                     ->with('projects', $projects)
-                    ->with('contacts', $contacts);
+                    ->with('contacts', $contacts)
+                    ->with('role_id', $role_id);
 	}
 
 
@@ -223,10 +242,31 @@ class AttendanceRecordController extends \BaseController {
 	{
 		$input = Input::all();
 
+		$role_name = null;
+    	$volunteer = false;
+
+    	if (Input::has('role_id')) {
+    		$role = ProjectRole::find(Input::get('role_id'));
+    		if ($role) {
+    			$role_name = $role->name;
+    			$volunteer = $role->volunteer;
+    		}
+    	}
+
+    	$data = array(
+        	'project_id'      => Input::get('project_id'),
+        	'contact_id'      => Input::get('contact_id'),
+        	'attendance_date' => Input::get('attendance_date'),
+        	'hours'           => Input::get('hours'),
+        	'role'            => $role_name,
+        	'volunteer'       => $volunteer
+    	);
+
         $validator = 
             Validator::make(
-                $input, 
-                $this->inject_id(AttendanceRecord::$rules, $id));
+                $data, 
+                $this->inject_id(AttendanceRecord::$rules, $id),
+                AttendanceRecord::$messages);
 
         if ($validator->passes())
         {
@@ -239,7 +279,7 @@ class AttendanceRecordController extends \BaseController {
 				$record = $user->attendance_records()->where('id', $id)->firstOrFail();
 			}
 
-            $record->update($input);
+            $record->update($data);
             return Redirect::route('attendance_record.show', $id);
         }
 
@@ -294,4 +334,6 @@ class AttendanceRecordController extends \BaseController {
 
         return Redirect::route('attendance_record.index');
     }
+
+    
 }

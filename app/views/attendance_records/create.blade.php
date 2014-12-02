@@ -27,6 +27,17 @@
         </div>
     </div>
 
+    <div class="form-group {{ $errors->has('role_id') ? 'has-error' : '' }}">
+        {{ Form::label('role_id', 'Role', array ('class' => 'col-sm-2 control-label')) }}
+        <div class="col-sm-4">
+            {{ Form::select(
+                'role_id', 
+                array ( '' => 'Select a role...' ), 
+                '', 
+                array ('class' => 'form-control')) }}
+        </div>
+    </div>
+
     <div class="form-group {{ $errors->has('attendance_date') ? 'has-error' : '' }}">
 	    {{ Form::label(
 	            'attendance_date', 
@@ -62,13 +73,9 @@
 
 {{ Form::close() }}
 
+
 @section('extra_js')
 
-<script type="text/javascript">
-    
-    $('#project_id').select2();
-    $('.multi-select').select2();
-    
-</script>
+@include('attendance_records._extra_js', array ('role_id' => -1))
 
 @endsection

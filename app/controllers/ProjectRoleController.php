@@ -127,4 +127,6 @@ class ProjectRoleController extends \BaseController {
 
         return Redirect::route('project.show', $project_id);
 	}
+
 }
+
