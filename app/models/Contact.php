@@ -76,4 +76,11 @@ class Contact extends Eloquent {
     {
         return $this->connection_cards()->count() > 0;
     }
+
+    // Calculate age based on date of birth
+    public function getAgeAttribute()
+    {
+        if ($this->date_of_birth) return $this->date_of_birth->age;
+        return null;
+    }
 }

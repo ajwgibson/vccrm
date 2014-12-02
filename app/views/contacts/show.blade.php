@@ -27,7 +27,8 @@
         <dd>{{{ $contact->email }}} &nbsp;</dd>
 
         <dt>Date of birth</dt>
-        <dd>{{{ $contact->date_of_birth ? $contact->date_of_birth->format('Y-m-d') : '' }}} &nbsp;</dd>
+        <dd>{{{ $contact->date_of_birth ? 
+                    "{$contact->date_of_birth->format('Y-m-d')} ({$contact->age})" : '' }}} &nbsp;</dd>
 
         <dt>Gender</dt>
         <dd>{{{ $contact->gender }}} &nbsp;</dd> 
