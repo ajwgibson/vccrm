@@ -88,6 +88,70 @@
 </div>
 
 
+<div class="col-sm-12">
+
+    <h2>Volunteers</h2>
+    
+    @if ($volunteer_records)
+        <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Volunteer</th>
+                <th>Hours</th>
+                <th>Start Date</th>
+                <th>Finish Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($volunteer_records as $volunteer)
+            <tr>
+                <td>{{{ "$volunteer->first_name $volunteer->last_name" }}}</td>
+                <td>{{{ number_format($volunteer->hours, 2) . ' hrs' }}}</td>
+                <td>{{{ $volunteer->start_date }}}</td>
+                <td>{{{ $volunteer->finish_date }}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @else
+        <p><i>There are no volunteering records for this project.</i></p>
+    @endif
+
+</div>
+
+
+<div class="col-sm-12">
+
+    <h2>Guests</h2>
+    
+    @if ($guest_records)
+        <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Guest</th>
+                <th>Hours</th>
+                <th>Start Date</th>
+                <th>Finish Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($guest_records as $guest)
+            <tr>
+                <td>{{{ "$guest->first_name $guest->last_name" }}}</td>
+                <td>{{{ number_format($guest->hours, 2) . ' hrs' }}}</td>
+                <td>{{{ $guest->start_date }}}</td>
+                <td>{{{ $guest->finish_date }}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @else
+        <p><i>There are no guest records for this project.</i></p>
+    @endif
+
+</div>
+
+
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

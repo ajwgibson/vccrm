@@ -76,12 +76,48 @@ class ProjectController extends \BaseController {
 	{
 		$project = Project::findOrFail($id);
 
+		$volunteer_records = 
+        	DB::table('attendance_records')
+        			->join('contacts', 'attendance_records.contact_id', '=', 'contacts.id')
+        			->select(
+        				DB::raw(
+        					'contacts.first_name as first_name, contacts.last_name as last_name' .
+        					',min(attendance_records.attendance_date) as start_date' .
+        					', max(attendance_records.attendance_date) as finish_date' .
+        					', sum(attendance_records.hours) as hours'))
+    				->groupBy('contacts.first_name')
+    				->groupBy('contacts.last_name')
+    				->where('attendance_records.project_id', '=', $project->id)
+    				->where('attendance_records.volunteer', '=', true)
+    				->orderBy('contacts.first_name')
+    				->orderBy('contacts.last_name')
+    				->get();
+
+		$guest_records = 
+        	DB::table('attendance_records')
+        			->join('contacts', 'attendance_records.contact_id', '=', 'contacts.id')
+        			->select(
+        				DB::raw(
+        					'contacts.first_name as first_name, contacts.last_name as last_name' .
+        					',min(attendance_records.attendance_date) as start_date' .
+        					', max(attendance_records.attendance_date) as finish_date' .
+        					', sum(attendance_records.hours) as hours'))
+    				->groupBy('contacts.first_name')
+    				->groupBy('contacts.last_name')
+    				->where('attendance_records.project_id', '=', $project->id)
+    				->where('attendance_records.volunteer', '=', false)
+    				->orderBy('contacts.first_name')
+    				->orderBy('contacts.last_name')
+    				->get();
+
         $this->layout->with('title', $this->title);
         $this->layout->with('subtitle', 'details of the "' . $project->name . '" project');
 
         $this->layout->content =
             View::make('projects.show')
-                    ->with('project', $project);
+                    ->with('project', $project)
+                    ->with('volunteer_records', $volunteer_records)
+                    ->with('guest_records', $guest_records);
 	}
 
 
