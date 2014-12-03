@@ -252,6 +252,74 @@
 </div>
 
 
+<div class="col-sm-12">
+
+    <h3>Record of volunteering</h3>
+    
+    @if ($volunteering_records)
+        <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Project</th>
+                <th>Leader</th>
+                <th>Hours</th>
+                <th>Start Date</th>
+                <th>Finish Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($volunteering_records as $record)
+            <tr>
+                <td>{{{ $record->project }}}</td>
+                <td>{{{ $record->leader }}}</td>
+                <td>{{{ number_format($record->hours, 2) . ' hrs' }}}</td>
+                <td>{{{ $record->start_date }}}</td>
+                <td>{{{ $record->finish_date }}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @else
+        <p><i>There are no volunteering records for this contact.</i></p>
+    @endif
+
+</div>
+
+
+<div class="col-sm-12">
+
+    <h3>Record of attendance as a guest</h3>
+    
+    @if ($guest_records)
+        <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Project</th>
+                <th>Leader</th>
+                <th>Hours</th>
+                <th>Start Date</th>
+                <th>Finish Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($guest_records as $record)
+            <tr>
+                <td>{{{ $record->project }}}</td>
+                <td>{{{ $record->leader }}}</td>
+                <td>{{{ number_format($record->hours, 2) . ' hrs' }}}</td>
+                <td>{{{ $record->start_date }}}</td>
+                <td>{{{ $record->finish_date }}}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @else
+        <p><i>There are no records for this contact attending as a guest.</i></p>
+    @endif
+
+</div>
+
+
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">

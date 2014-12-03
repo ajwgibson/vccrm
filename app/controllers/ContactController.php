@@ -142,12 +142,46 @@ class ContactController extends \BaseController {
 	{
 		$contact = Contact::with('connection_cards')->findOrFail($id);
 
+        $volunteering_records = 
+            DB::table('attendance_records')
+                    ->join('projects', 'attendance_records.project_id', '=', 'projects.id')
+                    ->select(
+                        DB::raw(
+                            'projects.name as project, projects.leader as leader' .
+                            ',min(attendance_records.attendance_date) as start_date' .
+                            ', max(attendance_records.attendance_date) as finish_date' .
+                            ', sum(attendance_records.hours) as hours'))
+                    ->groupBy('projects.name')
+                    ->groupBy('projects.leader')
+                    ->where('attendance_records.contact_id', '=', $contact->id)
+                    ->where('attendance_records.volunteer', '=', true)
+                    ->orderBy('projects.name')
+                    ->get();
+
+        $guest_records = 
+            DB::table('attendance_records')
+                    ->join('projects', 'attendance_records.project_id', '=', 'projects.id')
+                    ->select(
+                        DB::raw(
+                            'projects.name as project, projects.leader as leader' .
+                            ',min(attendance_records.attendance_date) as start_date' .
+                            ', max(attendance_records.attendance_date) as finish_date' .
+                            ', sum(attendance_records.hours) as hours'))
+                    ->groupBy('projects.name')
+                    ->groupBy('projects.leader')
+                    ->where('attendance_records.contact_id', '=', $contact->id)
+                    ->where('attendance_records.volunteer', '=', false)
+                    ->orderBy('projects.name')
+                    ->get();
+
 		$this->layout->with('title', $this->title);
         $this->layout->with('subtitle', "details for {$contact->first_name} {$contact->last_name}");
 
         $this->layout->content =
             View::make('contacts.show')
-                    ->with('contact', $contact);
+                    ->with('contact', $contact)
+                    ->with('volunteering_records', $volunteering_records)
+                    ->with('guest_records', $guest_records);
 	}
 
 
