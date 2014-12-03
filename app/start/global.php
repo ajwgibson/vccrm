@@ -101,3 +101,17 @@ HTML::macro('username', function()
     // Default to email if necessary
     return $user->email;
 });
+
+
+/*
+ |-------------------------------------------------------------------------
+ | Log sql for debugging purposes.
+ |-------------------------------------------------------------------------
+ */
+ 
+/*
+Event::listen("illuminate.query", function($query, $bindings, $time, $name) {
+    \Log::debug($query."\n");
+    \Log::debug(json_encode($bindings)."\n");
+});
+*/
