@@ -61,5 +61,14 @@ dd {
 }
 
 h3 {
+  margin-top: 40px;
   border-bottom: 1px solid #eee;
+}
+
+.dashboard-list {
+  margin-top: 20px;
+}
+
+canvas {
+  margin: 20px;
 }
