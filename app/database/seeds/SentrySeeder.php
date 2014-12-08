@@ -20,7 +20,7 @@ class SentrySeeder extends Seeder {
                 'home' => 1,
                 'logout' => 1,
                 'account.*' => 1,
-                'service_record.*' => 1,
+                'attendance_record.*' => 1,
             ),
         ));
 
@@ -37,6 +37,7 @@ class SentrySeeder extends Seeder {
             'name'        => 'Project Administration',
             'permissions' => array(
                 'project.*' => 1,
+                'project_role.*' => 1,
             ),
         ));
 
@@ -45,6 +46,8 @@ class SentrySeeder extends Seeder {
             'name'        => 'Contact Administration',
             'permissions' => array(
                 'contact.*' => 1,
+                'volunteer_details.*' => 1,
+                'connection_card.*' => 1,
             ),
         ));
 
