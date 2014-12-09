@@ -26,7 +26,7 @@ class HomeController extends BaseController {
     				//->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
     				//->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
     				->orderBy('hours', 'desc')
-    				->get(10);
+    				->take(10)->get();
 
 		// Top 5 projects by guest numbers
         $top_5_guest_projects = 
@@ -40,7 +40,7 @@ class HomeController extends BaseController {
     				//->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
     				//->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
     				->orderBy('hours', 'desc')
-    				->get(5);
+    				->take(5)->get();
 
 		// Top 5 projects by volunteer numbers
         $top_5_volunteer_projects = 
@@ -54,7 +54,7 @@ class HomeController extends BaseController {
     				//->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
     				//->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
     				->orderBy('hours', 'desc')
-    				->get(5);
+    				->take(5)->get();
 
 		$this->layout->content = View::make('index')
 									->with('top_10_volunteers', $top_10_volunteers)

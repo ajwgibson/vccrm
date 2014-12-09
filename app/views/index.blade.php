@@ -12,31 +12,25 @@
         	{{{ "$volunteer->first_name $volunteer->last_name" }}} </li>
     @endforeach
 </ol>
-
 <div class="clearfix"></div>
 
-<h3>Busiest projects</h3>
-<div class="row">
-	<div class="col-sm-6">
-		<h4>Volunteer hours...</h4>
-		<canvas id="top5VolunteerProjectsChart" width="250" height="250" class="pull-left"></canvas>
-		<ol class="pull-left dashboard-list">
-			@foreach ($top_5_volunteer_projects as $project)
-		        <li><span class="badge">{{{ number_format($project->hours, 2) }}} hrs</span> {{{ $project->name }}} </li>
-		    @endforeach
-		</ol>
-	</div>
-	<div class="col-sm-6">
-		<h4>Guest hours...</h4>
-		<canvas id="top5GuestProjectsChart" width="250" height="250" class="pull-left"></canvas>
-		<ol class="pull-left dashboard-list">
-			@foreach ($top_5_guest_projects as $project)
-		        <li><span class="badge">{{{ number_format($project->hours, 2) }}} hrs</span> {{{ $project->name }}}</li>
-		    @endforeach
-		</ol>
-	</div>
-</div>
+<h3>Busiest projects (by volunteer hours)</h3>
+<canvas id="top5VolunteerProjectsChart" width="250" height="250" class="pull-left"></canvas>
+<ol class="pull-left dashboard-list">
+	@foreach ($top_5_volunteer_projects as $project)
+        <li><span class="badge">{{{ number_format($project->hours, 2) }}} hrs</span> {{{ $project->name }}} </li>
+    @endforeach
+</ol>
+<div class="clearfix"></div>
 
+<h3>Busiest projects (by guest hours)</h3>
+<canvas id="top5GuestProjectsChart" width="250" height="250" class="pull-left"></canvas>
+<ol class="pull-left dashboard-list">
+	@foreach ($top_5_guest_projects as $project)
+        <li><span class="badge">{{{ number_format($project->hours, 2) }}} hrs</span> {{{ $project->name }}}</li>
+    @endforeach
+</ol>
+<div class="clearfix"></div>
 
 
 @section('extra_js')
