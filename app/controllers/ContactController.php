@@ -213,7 +213,7 @@ class ContactController extends \BaseController {
 	{
 		$input = Input::all();
 
-        if (!$input['date_of_birth']) $input = array_except($input, array('date_of_birth'));
+        if (!$input['date_of_birth'] || ($input['date_of_birth'] == '')) $input['date_of_birth'] = null;
         
         $validator = 
             Validator::make(

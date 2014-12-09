@@ -39,6 +39,10 @@ class ConnectionCardController extends \BaseController {
 
 		$input = Input::all();
 
+        if (!$input['signed_date'])           $input = array_except($input, array('signed_date'));
+        if (!$input['adults_in_household'])   $input = array_except($input, array('adults_in_household'));
+        if (!$input['children_in_household']) $input = array_except($input, array('children_in_household'));
+
         $validator = 
             Validator::make(
                 $input, 
@@ -113,6 +117,27 @@ class ConnectionCardController extends \BaseController {
 	public function update($id)
 	{
 		$input = Input::all();
+
+        if ($input['signed_date'] == '') $input['signed_date'] = null;
+        if ($input['adults_in_household'] == '') $input['adults_in_household'] = null;
+        if ($input['children_in_household'] == '') $input['children_in_household'] = null;
+
+    	// Sort out checkboxes :(
+        if (!array_key_exists('low_income', $input)) 			 $input['low_income'] = false;
+		if (!array_key_exists('budgeting_problems', $input)) 	 $input['budgeting_problems'] = false;
+		if (!array_key_exists('mental_health', $input)) 		 $input['mental_health'] = false;
+		if (!array_key_exists('addiction', $input)) 			 $input['addiction'] = false;
+		if (!array_key_exists('isolation', $input)) 			 $input['isolation'] = false;
+		if (!array_key_exists('unemployed', $input)) 			 $input['unemployed'] = false;
+		if (!array_key_exists('long_term_illness', $input)) 	 $input['long_term_illness'] = false;
+		if (!array_key_exists('benefit_issues', $input)) 		 $input['benefit_issues'] = false;
+		if (!array_key_exists('relationship_breakdown', $input)) $input['relationship_breakdown'] = false;
+		if (!array_key_exists('best_time_morning', $input)) 	 $input['best_time_morning'] = false;
+		if (!array_key_exists('best_time_afternoon', $input)) 	 $input['best_time_afternoon'] = false;
+		if (!array_key_exists('best_time_evening', $input)) 	 $input['best_time_evening'] = false;
+		if (!array_key_exists('best_time_weekday', $input)) 	 $input['best_time_weekday'] = false;
+		if (!array_key_exists('best_time_saturday', $input)) 	 $input['best_time_saturday'] = false;
+		if (!array_key_exists('best_time_any', $input)) 		 $input['best_time_any'] = false;
 
         $validator = 
             Validator::make(

@@ -21,6 +21,7 @@ class SentrySeeder extends Seeder {
                 'logout' => 1,
                 'account.*' => 1,
                 'attendance_record.*' => 1,
+                'project.roles' => 1,
             ),
         ));
 

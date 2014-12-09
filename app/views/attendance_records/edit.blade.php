@@ -6,14 +6,14 @@
 <div class="form-horizontal">
 
 	<div class="form-group {{ $errors->has('project_id') ? 'has-error' : '' }}">
-        {{ Form::label('project_id', 'Project', array ('class' => 'col-sm-2 control-label')) }}
+        {{ Form::label('project_id', 'Project', array ('class' => 'col-sm-2 control-label required')) }}
         <div class="col-sm-4">
             {{ Form::select('project_id', $projects, $record->project_id, array ('class' => 'form-control')) }}
         </div>
     </div>
 
     <div class="form-group {{ $errors->has('contact_id') ? 'has-error' : '' }}">
-        {{ Form::label('contact_id', 'Contact', array ('class' => 'col-sm-2 control-label')) }}
+        {{ Form::label('contact_id', 'Contact', array ('class' => 'col-sm-2 control-label required')) }}
         <div class="col-sm-4">
             {{ Form::select('contact_id', $contacts, $record->contact_id, array ('class' => 'form-control')) }}
         </div>
