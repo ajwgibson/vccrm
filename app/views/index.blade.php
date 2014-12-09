@@ -4,7 +4,7 @@
 @stop
 
 
-<h3>Busiest volunteers this month</h3>
+<h3>Busiest volunteers</h3>
 <canvas id="top10VolunteersChart" width="250" height="250" class="pull-left"></canvas>
 <ol class="pull-left dashboard-list">
 	@foreach ($top_10_volunteers as $volunteer)
@@ -15,23 +15,23 @@
 
 <div class="clearfix"></div>
 
-<h3>Busiest projects this month</h3>
+<h3>Busiest projects</h3>
 <div class="row">
-	<div class="col-sm-6">
-		<h4>Guest hours...</h4>
-		<canvas id="top5GuestProjectsChart" width="250" height="250" class="pull-left"></canvas>
-		<ol class="pull-left dashboard-list">
-			@foreach ($top_5_guest_projects as $project)
-		        <li><span class="badge">{{{ number_format($project->hours, 2) }}} hrs</span> {{{ $project->name }}}</li>
-		    @endforeach
-		</ol>
-	</div>
 	<div class="col-sm-6">
 		<h4>Volunteer hours...</h4>
 		<canvas id="top5VolunteerProjectsChart" width="250" height="250" class="pull-left"></canvas>
 		<ol class="pull-left dashboard-list">
 			@foreach ($top_5_volunteer_projects as $project)
 		        <li><span class="badge">{{{ number_format($project->hours, 2) }}} hrs</span> {{{ $project->name }}} </li>
+		    @endforeach
+		</ol>
+	</div>
+	<div class="col-sm-6">
+		<h4>Guest hours...</h4>
+		<canvas id="top5GuestProjectsChart" width="250" height="250" class="pull-left"></canvas>
+		<ol class="pull-left dashboard-list">
+			@foreach ($top_5_guest_projects as $project)
+		        <li><span class="badge">{{{ number_format($project->hours, 2) }}} hrs</span> {{{ $project->name }}}</li>
 		    @endforeach
 		</ol>
 	</div>

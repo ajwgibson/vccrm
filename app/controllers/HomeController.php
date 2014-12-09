@@ -23,8 +23,8 @@ class HomeController extends BaseController {
     				->groupBy('contacts.first_name')
     				->groupBy('contacts.last_name')
     				->where('attendance_records.volunteer', '=', true)
-    				->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
-    				->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
+    				//->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
+    				//->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
     				->orderBy('hours', 'desc')
     				->get(10);
 
@@ -37,8 +37,8 @@ class HomeController extends BaseController {
         					'projects.name as name, sum(attendance_records.hours) as hours'))
     				->groupBy('projects.name')
     				->where('attendance_records.volunteer', '=', false)
-    				->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
-    				->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
+    				//->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
+    				//->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
     				->orderBy('hours', 'desc')
     				->get(5);
 
@@ -51,8 +51,8 @@ class HomeController extends BaseController {
         					'projects.name as name, sum(attendance_records.hours) as hours'))
     				->groupBy('projects.name')
     				->where('attendance_records.volunteer', '=', true)
-    				->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
-    				->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
+    				//->where(DB::raw('year(attendance_records.attendance_date)'), '=', DB::raw('year(current_date)'))
+    				//->where(DB::raw('month(attendance_records.attendance_date)'), '=', DB::raw('month(current_date)'))
     				->orderBy('hours', 'desc')
     				->get(5);
 
