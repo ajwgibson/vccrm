@@ -81,8 +81,10 @@ class ProjectController extends \BaseController {
         			->join('contacts', 'attendance_records.contact_id', '=', 'contacts.id')
         			->select(
         				DB::raw(
-        					'contacts.first_name as first_name, contacts.last_name as last_name' .
-        					',min(attendance_records.attendance_date) as start_date' .
+        					'contacts.id as id' .
+        					', contacts.first_name as first_name, contacts.last_name as last_name' .
+        					', contacts.telephone as telephone, contacts.mobile as mobile, contacts.email as email' .
+        					', min(attendance_records.attendance_date) as start_date' .
         					', max(attendance_records.attendance_date) as finish_date' .
         					', sum(attendance_records.hours) as hours'))
     				->groupBy('contacts.first_name')
@@ -98,8 +100,9 @@ class ProjectController extends \BaseController {
         			->join('contacts', 'attendance_records.contact_id', '=', 'contacts.id')
         			->select(
         				DB::raw(
-        					'contacts.first_name as first_name, contacts.last_name as last_name' .
-        					',min(attendance_records.attendance_date) as start_date' .
+        					'contacts.id as id' .
+        					', contacts.first_name as first_name, contacts.last_name as last_name' .
+        					', min(attendance_records.attendance_date) as start_date' .
         					', max(attendance_records.attendance_date) as finish_date' .
         					', sum(attendance_records.hours) as hours'))
     				->groupBy('contacts.first_name')

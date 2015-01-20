@@ -97,6 +97,9 @@
         <thead>
             <tr>
                 <th>Volunteer</th>
+                <th>Telephone</th>
+                <th>Mobile</th>
+                <th>Email</th>
                 <th>Hours</th>
                 <th>Start Date</th>
                 <th>Finish Date</th>
@@ -105,7 +108,16 @@
         <tbody>
         @foreach ($volunteer_records as $volunteer)
             <tr>
-                <td>{{{ "$volunteer->first_name $volunteer->last_name" }}}</td>
+                <td>
+                    {{ link_to_route(
+                        'contact.show', 
+                        "$volunteer->first_name $volunteer->last_name", 
+                        $parameters = array( 'id' => $volunteer->id), 
+                        $attributes = array( 'class' => '')) }}
+                </td>
+                <td>{{{ $volunteer->telephone }}}</td>
+                <td>{{{ $volunteer->mobile }}}</td>
+                <td>{{{ $volunteer->email }}}</td>
                 <td>{{{ number_format($volunteer->hours, 2) . ' hrs' }}}</td>
                 <td>{{{ $volunteer->start_date }}}</td>
                 <td>{{{ $volunteer->finish_date }}}</td>
@@ -137,7 +149,13 @@
         <tbody>
         @foreach ($guest_records as $guest)
             <tr>
-                <td>{{{ "$guest->first_name $guest->last_name" }}}</td>
+                <td>
+                    {{ link_to_route(
+                        'contact.show', 
+                        "$guest->first_name $guest->last_name", 
+                        $parameters = array( 'id' => $guest->id), 
+                        $attributes = array( 'class' => '')) }}
+                </td>
                 <td>{{{ number_format($guest->hours, 2) . ' hrs' }}}</td>
                 <td>{{{ $guest->start_date }}}</td>
                 <td>{{{ $guest->finish_date }}}</td>
