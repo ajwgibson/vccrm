@@ -59,7 +59,7 @@
                                 || strpos(Route::currentRouteName(), 'connection_card') === 0
                                 || strpos(Route::currentRouteName(), 'volunteer_detail') === 0 ? 'active' : '' }}">{{ link_to_route('contact.index', 'Contacts') }}</li>
                         @endif
-                        @if (Sentry::hasAccess('project.*'))
+                        @if (Sentry::hasAccess('project.index'))
                             <li class="{{ strpos(Route::currentRouteName(), 'project') === 0 ? 'active' : '' }}">{{ link_to_route('project.index', 'Projects') }}</li>
                         @endif
                         @if (Sentry::hasAccess('user.*'))
