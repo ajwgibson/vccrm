@@ -13,7 +13,12 @@
 
 App::before(function($request)
 {
-	//
+    // Force https for all routes?
+    $secure = Config::get('session.secure', false);
+	if($secure && !Request::secure())
+    {
+        return Redirect::secure(Request::path());
+    }
 });
 
 
