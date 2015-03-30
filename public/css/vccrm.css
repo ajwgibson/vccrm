@@ -72,3 +72,9 @@ h3 {
 canvas {
   margin: 20px;
 }
+
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+}

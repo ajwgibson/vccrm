@@ -79,6 +79,7 @@ class ProjectController extends \BaseController {
 		$volunteer_records = 
         	DB::table('attendance_records')
         			->join('contacts', 'attendance_records.contact_id', '=', 'contacts.id')
+        			->leftJoin('volunteer_details', 'attendance_records.contact_id', '=', 'volunteer_details.contact_id')
         			->select(
         				DB::raw(
         					'contacts.id as id' .
@@ -86,7 +87,8 @@ class ProjectController extends \BaseController {
         					', contacts.telephone as telephone, contacts.mobile as mobile, contacts.email as email' .
         					', min(attendance_records.attendance_date) as start_date' .
         					', max(attendance_records.attendance_date) as finish_date' .
-        					', sum(attendance_records.hours) as hours'))
+        					', sum(attendance_records.hours) as hours' .
+        					', volunteer_details.id as volunteer_details_id'))
     				->groupBy('contacts.first_name')
     				->groupBy('contacts.last_name')
     				->where('attendance_records.project_id', '=', $project->id)

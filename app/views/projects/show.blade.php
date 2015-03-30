@@ -11,7 +11,7 @@
     </dl>
 </div>
 
-<div class="col-sm-6">
+<div class="col-sm-6 hidden-print">
 
     {{ Form::open(
         array(
@@ -51,7 +51,7 @@
 <div class="col-sm-12">
     <h2>Roles</h2>
     
-    <div>
+    <div class="hidden-print">
         {{ link_to_route(
                 'project_role.create', 
                 'Add a new role', 
@@ -65,7 +65,7 @@
                 <th>Name</th>
                 <th>Typical attendance</th>
                 <th>Volunteer?</th>
-                <th></th>
+                <th class="hidden-print"></th>
             </tr>
         </thead>
         <tbody>
@@ -74,7 +74,7 @@
                     <td>{{{ $role->name }}}</td>
                     <td>{{{ number_format($role->hours, 2) . ' hrs' }}}</td>
                     <td>{{{ $role->volunteer ? 'Yes' : 'No' }}}</td>
-                    <td>
+                    <td class="hidden-print">
                         {{ link_to_route(
                             'project_role.show', 
                             'View details', 
@@ -109,6 +109,11 @@
         @foreach ($volunteer_records as $volunteer)
             <tr>
                 <td>
+                    @if (!($volunteer->volunteer_details_id))
+                    <span 
+                        class="glyphicon glyphicon-info-sign text-danger" 
+                        data-toggle="tooltip" data-placement="auto left" title="This contact does not appear to have completed a volunteer details form."></span>
+                    @endif
                     {{ link_to_route(
                         'contact.show', 
                         "$volunteer->first_name $volunteer->last_name", 
@@ -202,6 +207,8 @@
     $('#continue').click(function() {
         $('form.delete').submit();
     });
+
+    $('[data-toggle="tooltip"]').tooltip()
     
 </script>
 
