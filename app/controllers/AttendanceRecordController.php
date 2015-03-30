@@ -42,6 +42,7 @@ class AttendanceRecordController extends \BaseController {
 
         if (!(empty($filter_name))) {
         	$records = $records->join('contacts', 'attendance_records.contact_id', '=', 'contacts.id');
+            $records = $records->select('attendance_records.*', 'contacts.first_name', 'contacts.last_name');
             $records = $records
                 ->where(function($query) use($filter_name) {
                     $query->where('contacts.first_name', 'LIKE', "%$filter_name%")
