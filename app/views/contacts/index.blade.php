@@ -11,6 +11,12 @@
 
 <div>
 	{{ link_to_route('contact.create', 'Add a new contact', array(), array('class' => 'btn btn-primary')) }}
+
+    {{ link_to_route(
+        'contact.export', 
+        'Export all contacts', 
+        $parameters = array( ), 
+        $attributes = array( 'class' => 'btn btn-default' ) ) }}
 </div>	
 
 <div class="clearfix"></div>

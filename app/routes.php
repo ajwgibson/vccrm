@@ -37,6 +37,7 @@ Route::group(array('before' => 'sentry'), function()
     // Contact administration
     Route::post('contact/filter',     array('as' => 'contact.filter',      'uses' => 'ContactController@filter'));
     Route::get('contact/resetfilter', array('as' => 'contact.resetfilter', 'uses' => 'ContactController@resetFilter'));
+    Route::get('contact/export',      array('as' => 'contact.export',      'uses' => 'ContactController@export'));
     Route::resource('contact', 'ContactController');
 
     // Volunteer Details
@@ -59,6 +60,7 @@ Route::group(array('before' => 'sentry'), function()
     Route::get('attendance_record/resetfilter', array('as' => 'attendance_record.resetfilter', 'uses' => 'AttendanceRecordController@resetFilter'));
     Route::get('attendance_record/export',     array('as' => 'attendance_record.export', 'uses' => 'AttendanceRecordController@export'));
     Route::resource('attendance_record', 'AttendanceRecordController');
+
 });
 
 

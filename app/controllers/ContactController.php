@@ -246,4 +246,18 @@ class ContactController extends \BaseController {
         return Redirect::route('contact.index');
 	}
 
+    /**
+     * Exports the contacts as CSV.
+     */
+    public function export()
+    {
+        $contacts = Contact::all();
+        
+        $view = View::make('contacts.export')->with('contacts', $contacts);
+
+        return Response::make($view)
+                ->header('Content-Type', 'text/csv')
+                ->header('Content-Disposition', "attachment; filename='contacts.csv'");
+    }
+
 }
