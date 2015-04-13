@@ -114,7 +114,7 @@
         </div>
 
     </fieldset>
-    
+
     <fieldset>
         
         <legend>Additional information</legend>

@@ -140,6 +140,21 @@
 
     </fieldset>
 
+    <fieldset>
+        
+        <legend>Affiliation</legend>
+
+        <p><em>Most of our volunteers are affiliated with Vineyard Compassion, please confirm...</em></p>
+        <div class="form-group">
+            {{ Form::label('', 'Vineyard Compassion volunteer', array ('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-offset-2">
+                <label class="checkbox-inline">{{ Form::radio('vineyard_compassion', true) }} Yes</label>
+                <label class="checkbox-inline">{{ Form::radio('vineyard_compassion', false) }} No</label>
+            </div>
+        </div>
+
+    </fieldset>
+
     <div class="form-group">
         <div class="col-sm-offset-2">
             {{ Form::submit($button, array ('class' => 'btn btn-primary')) }} 

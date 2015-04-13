@@ -168,6 +168,13 @@
     </div> 
 
     <div class="row">
+        <div class="col-sm-6 show-label">Vineyard Compassion volunteer?</div>
+        <div class="col-sm-6 show-value">
+            {{{ $contact->volunteer_details->vineyard_compassion ? 'Yes' : 'No' }}} &nbsp;
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-sm-6">
             {{ Form::open(
                 array(
