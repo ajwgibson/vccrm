@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class Contact extends Eloquent {
 	
 	protected $table = 'contacts';
@@ -81,6 +83,19 @@ class Contact extends Eloquent {
     public function getAgeAttribute()
     {
         if ($this->date_of_birth) return $this->date_of_birth->age;
+        return null;
+    }
+
+    // Get birthday (this year rather than date of birth)
+    public function getBirthdayAttribute()
+    {
+        if ($this->date_of_birth) {
+            $this_year = Carbon::today()->year;
+            $tmp = $this->date_of_birth->copy();
+            $tmp->year = $this_year;
+            return $tmp;
+        }
+
         return null;
     }
 }

@@ -56,10 +56,17 @@ class HomeController extends BaseController {
     				->orderBy('hours', 'desc')
     				->take(5)->get();
 
-		$this->layout->content = View::make('index')
+		// Contacts with a birthday this month
+        $contacts =
+            Contact::where(DB::raw('month(date_of_birth)'), '=', DB::raw('month(current_date)'))
+                    ->orderBy('date_of_birth')
+                    ->get();
+
+        $this->layout->content = View::make('index')
 									->with('top_10_volunteers', $top_10_volunteers)
 									->with('top_5_guest_projects', $top_5_guest_projects)
-									->with('top_5_volunteer_projects', $top_5_volunteer_projects);
+                                    ->with('top_5_volunteer_projects', $top_5_volunteer_projects)
+									->with('contacts', $contacts);
 	}
 
 }

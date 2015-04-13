@@ -4,9 +4,11 @@
 @stop
 
 
+<div class="col-sm-8">
+
 @if ($top_10_volunteers)
 
-<h3>Top 10 busiest volunteers last month</h3>
+<h4>Top 10 busiest volunteers last month</h4>
 <canvas id="top10VolunteersChart" width="250" height="250" class="pull-left"></canvas>
 <ol class="pull-left dashboard-list">
 	@foreach ($top_10_volunteers as $volunteer)
@@ -20,7 +22,7 @@
 
 @if ($top_5_volunteer_projects)
 
-<h3>Top 5 busiest projects last month (by volunteer hours)</h3>
+<h4>Top 5 busiest projects last month (by volunteer hours)</h4>
 <canvas id="top5VolunteerProjectsChart" width="250" height="250" class="pull-left"></canvas>
 <ol class="pull-left dashboard-list">
 	@foreach ($top_5_volunteer_projects as $project)
@@ -33,7 +35,7 @@
 
 @if ($top_5_guest_projects)
 
-<h3>Top 5 busiest projects last month (by guest hours)</h3>
+<h4>Top 5 busiest projects last month (by guest hours)</h4>
 <canvas id="top5GuestProjectsChart" width="250" height="250" class="pull-left"></canvas>
 <ol class="pull-left dashboard-list">
 	@foreach ($top_5_guest_projects as $project)
@@ -44,6 +46,31 @@
 
 @endif
 
+</div>
+
+<div class="col-sm-4">
+
+@if ($contacts && count($contacts))
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h4 class="panel-title"><span class="glyphicon glyphicon-gift"></span> Birthdays this month</h4>
+  </div>
+  <ul class="list-group">
+	@foreach ($contacts as $contact)
+    <li class="list-group-item">
+    	{{ link_to_route(
+				'contact.show', 
+				"$contact->first_name $contact->last_name", 
+				$parameters = array( 'id' => $contact->id), 
+				$attributes = array( 'class' => '')) }} <span class="badge alert-info">{{{ $contact->birthday->format('l jS') }}}</span></li>
+	@endforeach
+  </ul>
+</div>
+
+@endif
+
+</div>
 
 @section('extra_js')
 
