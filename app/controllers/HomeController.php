@@ -59,7 +59,7 @@ class HomeController extends BaseController {
 		// Contacts with a birthday this month
         $contacts =
             Contact::where(DB::raw('month(date_of_birth)'), '=', DB::raw('month(current_date)'))
-                    ->orderBy('date_of_birth')
+                    ->orderBy(DB::raw('day(date_of_birth)'))
                     ->get();
 
         $this->layout->content = View::make('index')
