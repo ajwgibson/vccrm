@@ -140,7 +140,7 @@ class ContactController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		$contact = Contact::with('connection_cards')->findOrFail($id);
+		$contact = Contact::with('connection_cards')->with('case_notes')->findOrFail($id);
 
         $volunteering_records = 
             DB::table('attendance_records')

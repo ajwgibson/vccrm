@@ -260,6 +260,54 @@
 
 
 <div class="col-sm-12">
+    
+    <h3>Case notes</h3>
+
+@if ($contact->case_notes->count() > 0)
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Project</th>
+                <th>Volunteer</th>
+                <th>Date</th>
+                <th>Method</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach ($contact->case_notes as $case_note)
+            <tr>
+                <td>{{{ $case_note->project->name }}}</td>
+                <td>{{{ $case_note->volunteer }}}</td>
+                <td>{{{ $case_note->conversation_date ? $case_note->conversation_date->format('Y-m-d') : '' }}}</td>
+                <td>{{{ $case_note->channel }}}</td>
+                <td>{{ link_to_route(
+                        'case_note.show', 
+                        'Show details', 
+                        $parameters = array( 'id' => $case_note->id), 
+                        $attributes = array( 'class' => '')) }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
+@endif
+
+    <div class="row">
+        <div class="col-sm-6">
+            {{ link_to_route(
+                'case_note.create', 
+                'Add a case note', 
+                $parameters = array( 'id' => $contact->id), 
+                $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+        </div>
+    </div>
+
+</div>
+
+
+<div class="col-sm-12">
 
     <h3>Record of volunteering</h3>
     
@@ -335,7 +383,8 @@
             <span class="glyphicon glyphicon-warning-sign"></span> Warning</p>
         <p>
             You are about to delete a contact called <strong>"{{{ $contact->first_name }}} {{{ $contact->last_name }}}"</strong>
-            from the system. This will also delete the contact's attendance records.
+            from the system. This will also delete all other information associated with this contact
+            like connection cards, case notes and attendance records.
             <br/>
             <br/>
             Are you sure you want to continue?</p>

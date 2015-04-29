@@ -47,13 +47,21 @@ Route::group(array('before' => 'sentry'), function()
     Route::post('volunteer_details/{id}/update',    array('as' => 'volunteer_details.update',  'uses' => 'VolunteerDetailsController@update'));
     Route::delete('volunteer_details/{id}/destroy', array('as' => 'volunteer_details.destroy', 'uses' => 'VolunteerDetailsController@destroy'));
 
-    // Contact cards
+    // Connection cards
     Route::get('connection_card/{contact_id}/create', array('as' => 'connection_card.create',  'uses' => 'ConnectionCardController@create'));
     Route::post('connection_card/{id}/store',         array('as' => 'connection_card.store',   'uses' => 'ConnectionCardController@store'));
     Route::get('connection_card/{id}',                array('as' => 'connection_card.show',    'uses' => 'ConnectionCardController@show'));
     Route::get('connection_card/{id}/edit',           array('as' => 'connection_card.edit',    'uses' => 'ConnectionCardController@edit'));
     Route::post('connection_card/{id}/update',        array('as' => 'connection_card.update',  'uses' => 'ConnectionCardController@update'));
     Route::delete('connection_card/{id}/destroy',     array('as' => 'connection_card.destroy', 'uses' => 'ConnectionCardController@destroy'));
+
+    // Case notes
+    Route::get('case_note/{contact_id}/create', array('as' => 'case_note.create',  'uses' => 'CaseNoteController@create'));
+    Route::post('case_note/{id}/store',         array('as' => 'case_note.store',   'uses' => 'CaseNoteController@store'));
+    Route::get('case_note/{id}',                array('as' => 'case_note.show',    'uses' => 'CaseNoteController@show'));
+    Route::get('case_note/{id}/edit',           array('as' => 'case_note.edit',    'uses' => 'CaseNoteController@edit'));
+    Route::post('case_note/{id}/update',        array('as' => 'case_note.update',  'uses' => 'CaseNoteController@update'));
+    Route::delete('case_note/{id}/destroy',     array('as' => 'case_note.destroy', 'uses' => 'CaseNoteController@destroy'));
 
     // Attendance record pages
     Route::post('attendance_record/filter',     array('as' => 'attendance_record.filter', 'uses' => 'AttendanceRecordController@filter'));

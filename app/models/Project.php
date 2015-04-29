@@ -29,4 +29,10 @@ class Project extends Eloquent {
     {
         return $this->hasMany('ConnectionCard');
     }
+
+    // Relationship: case_notes
+    public function case_notes()
+    {
+        return $this->hasMany('CaseNote');
+    }
 }
