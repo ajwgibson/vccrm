@@ -105,4 +105,15 @@ class Contact extends Eloquent {
 
         return null;
     }
+
+    // Combine address fields into a single string
+    public function getAddressAttribute()
+    {
+        $address = "$this->address_line_1, $this->address_line_2";
+        $address = trim($address, " ,");
+        $address = "$address, $this->address_town";
+        $address = trim($address, " ,");
+        $address = "$address, $this->address_postcode";
+        return trim($address, " ,");
+    }
 }

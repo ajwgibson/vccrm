@@ -52,7 +52,10 @@ class ConnectionCardController extends \BaseController {
         if ($validator->passes())
         {
         	$contact->connection_cards()->save(new ConnectionCard($input));
-            return Redirect::route('contact.show', $contact_id);
+        	
+            return Redirect::route(
+            	'contact.show', 
+            	array('id' => $contact_id, 'guest-details' => true));
         }
 
         return Redirect::route('connection_card.create', $contact_id)
@@ -174,7 +177,9 @@ class ConnectionCardController extends \BaseController {
 
 		ConnectionCard::destroy($id);
 
-        return Redirect::route('contact.show', $contact_id);
+        return Redirect::route(
+            	'contact.show', 
+            	array('id' => $contact_id, 'guest-details' => true));
 	}
 
 }

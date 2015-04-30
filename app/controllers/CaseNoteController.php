@@ -50,7 +50,10 @@ class CaseNoteController extends \BaseController {
         if ($validator->passes())
         {
         	$contact->case_notes()->save(new CaseNote($input));
-            return Redirect::route('contact.show', $contact_id);
+
+            return Redirect::route(
+            	'contact.show', 
+            	array('id' => $contact_id, 'guest-details' => true));
         }
 
         return Redirect::route('case_note.create', $contact_id)
@@ -151,7 +154,9 @@ class CaseNoteController extends \BaseController {
 
 		CaseNote::destroy($id);
 
-        return Redirect::route('contact.show', $contact_id);
+        return Redirect::route(
+            	'contact.show', 
+            	array('id' => $contact_id, 'guest-details' => true));
 	}
 
 }

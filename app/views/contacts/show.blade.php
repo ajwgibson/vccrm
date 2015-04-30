@@ -1,5 +1,5 @@
 
-<div class="col-sm-6">
+<div class="col-sm-9">
     <dl class="dl-horizontal">
 
         <dt>First name</dt>
@@ -9,13 +9,7 @@
         <dd>{{{ $contact->last_name }}} &nbsp;</dd>
 
         <dt>Address</dt>
-        <dd>
-            {{{ $contact->address_line_1 }}}<br>
-            {{{ $contact->address_line_2 }}}<br>
-            {{{ $contact->address_town }}}  <br>
-            {{{ $contact->address_postcode }}} 
-            &nbsp;
-        </dd>
+        <dd>{{{ $contact->address }}} &nbsp;</dd>
 
         <dt>Telephone number</dt>
         <dd>{{{ $contact->telephone }}} &nbsp;</dd>
@@ -27,19 +21,18 @@
         <dd>{{{ $contact->email }}} &nbsp;</dd>
 
         <dt>Date of birth</dt>
-        <dd>{{{ $contact->date_of_birth ? 
-                    "{$contact->date_of_birth->format('Y-m-d')} ({$contact->age})" : '' }}} &nbsp;</dd>
+        <dd>{{{ $contact->date_of_birth ? "{$contact->date_of_birth->format('Y-m-d')} ({$contact->age})" : '' }}} &nbsp;</dd>
 
         <dt>Gender</dt>
         <dd>{{{ $contact->gender }}} &nbsp;</dd> 
 
         <dt>Notes</dt>
-        <dd>{{{ $contact->notes }}} &nbsp;</dd>
+        <dd class="pre">{{{ $contact->notes }}}</dd>
 
     </dl>
 </div>
 
-<div class="col-sm-6">
+<div class="col-sm-3">
 
     {{ Form::open(
         array(
@@ -76,303 +69,259 @@
 
 </div>
 
-<div class="col-sm-12">
-    
-    <h3>Volunteer details</h3>
+<div class="col-sm-12" role="tabpanel">
 
-@if ($contact->volunteer_details)
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active" ><a href="#volunteer-details" aria-controls="volunteer-details" role="tab" data-toggle="tab">Volunteer details</a></li>
+        <li role="presentation"><a href="#guest-details" aria-controls="guest-details" role="tab" data-toggle="tab" id="guest-details-tab-link">Guest details</a></li>
+    </ul>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Next of kin</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->next_of_kin_name }}} <br>
-            {{{ $contact->volunteer_details->next_of_kin_telephone }}} <br>
-            {{{ $contact->volunteer_details->next_of_kin_relationship }}} 
-            &nbsp;
-        </div>  
-    </div>
+    <!-- Nav tab content -->
+    <div class="tab-content">
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Contact in case of emergency</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->emergency_name }}} <br>
-            {{{ $contact->volunteer_details->emergency_telephone  }}} <br>
-            {{{ $contact->volunteer_details->emergency_relationship }}} 
-            &nbsp;
-        </div>  
-    </div>
+        <div role="tabpanel" class="tab-pane fade in active" id="volunteer-details">
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Health issues?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->health_issues ? 'Yes' : 'No' }}} <br>
-            {{{ $contact->volunteer_details->health_issues_details }}} 
-            &nbsp;
-        </div>
-    </div>        
+            @if ($contact->volunteer_details)
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Personal development, reasons for volunteering</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->personal_development_notes }}} &nbsp;
-        </div>
-    </div> 
+                <div class="row">
+                    <div class="col-sm-9">
+                        <dl class="dl-vertical">
+                            <dt>Next of kin</dt>
+                            <dd>{{{ $contact->volunteer_details->next_of_kin_name }}}</dd>
+                            <dd>{{{ $contact->volunteer_details->next_of_kin_telephone }}}</dd>
+                            <dd>{{{ $contact->volunteer_details->next_of_kin_relationship }}} </dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Access NI required?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->access_ni_required ? 'Yes' : 'No' }}} &nbsp; 
-        </div>
-    </div> 
+                            <dt>Contact in case of emergency</dt>
+                            <dd>{{{ $contact->volunteer_details->emergency_name }}}</dd>
+                            <dd>{{{ $contact->volunteer_details->emergency_telephone  }}}</dd>
+                            <dd>{{{ $contact->volunteer_details->emergency_relationship }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Access NI received?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->access_ni_received ? 'Yes' : 'No' }}} &nbsp; 
-        </div>
-    </div> 
+                            <dt>Health issues?</dt>
+                            <dd>{{{ $contact->volunteer_details->health_issues ? 'Yes' : 'No' }}}</dd>
+                            <dd class="pre">{{{ $contact->volunteer_details->health_issues_details }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Confidentiality agreement signed?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->confidentiality ? 'Yes' : 'No' }}} &nbsp;
-        </div>
-    </div> 
+                            <dt>Personal development, reasons for volunteering</dt>
+                            <dd class="pre">{{{ $contact->volunteer_details->personal_development_notes }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Photograph permission given?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->photographs ? 'Yes' : 'No' }}} &nbsp; 
-        </div>
-    </div> 
+                            <dt>Access NI required?</dt>
+                            <dd>{{{ $contact->volunteer_details->access_ni_required ? 'Yes' : 'No' }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Health and safety checklist completed for current location?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->health_and_safety ? 'Yes' : 'No' }}} &nbsp;
-        </div>
-    </div> 
+                            <dt>Access NI received?</dt>
+                            <dd>{{{ $contact->volunteer_details->access_ni_received ? 'Yes' : 'No' }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Safeguarding training received?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->safeguarding ? 'Yes' : 'No' }}} &nbsp;
-        </div>
-    </div> 
+                            <dt>Confidentiality agreement signed?</dt>
+                            <dd>{{{ $contact->volunteer_details->confidentiality ? 'Yes' : 'No' }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Notes</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->notes }}} &nbsp;
-        </div>
-    </div> 
+                            <dt>Photograph permission given?</dt>
+                            <dd>{{{ $contact->volunteer_details->photographs ? 'Yes' : 'No' }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6 show-label">Vineyard Compassion volunteer?</div>
-        <div class="col-sm-6 show-value">
-            {{{ $contact->volunteer_details->vineyard_compassion ? 'Yes' : 'No' }}} &nbsp;
-        </div>
-    </div>
+                            <dt>Health and safety checklist completed for current location?</dt>
+                            <dd>{{{ $contact->volunteer_details->health_and_safety ? 'Yes' : 'No' }}}</dd>
 
-    <div class="row">
-        <div class="col-sm-6">
-            {{ Form::open(
-                array(
-                    'method' => 'DELETE', 
-                    'route'  => array('volunteer_details.destroy', $contact->volunteer_details->id),
-                    'id'     => 'delete_details' ) ) }}
+                            <dt>Safeguarding training received?</dt>
+                            <dd>{{{ $contact->volunteer_details->safeguarding ? 'Yes' : 'No' }}}</dd>
 
-            {{ link_to_route(
-                'volunteer_details.edit', 
-                'Edit volunteer details', 
-                $parameters = array( 'id' => $contact->volunteer_details->id), 
-                $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+                            <dt>Notes</dt>
+                            <dd class="pre">{{{ $contact->volunteer_details->notes }}}</dd>
 
-            {{ Form::button(
-                'Delete volunteer details', 
-                array(
-                    'class' => 'btn btn-danger btn-sm',
-                    'data-toggle' => 'modal',
-                    'data-target' => '#modal-details' )) }}
+                            <dt>Vineyard Compassion volunteer?</dt>
+                            <dd>{{{ $contact->volunteer_details->vineyard_compassion ? 'Yes' : 'No' }}}</dd> &nbsp;
+
+                        </dl>
+                    </div>
+                    <div class="col-sm-3">
+
+                        {{ Form::open(
+                            array(
+                                'method' => 'DELETE', 
+                                'route'  => array('volunteer_details.destroy', $contact->volunteer_details->id),
+                                'id'     => 'delete_details' ) ) }}
+
+                        <div style="margin-bottom:10px;">
+                        {{ link_to_route(
+                            'volunteer_details.edit', 
+                            'Edit volunteer details', 
+                            $parameters = array( 'id' => $contact->volunteer_details->id), 
+                            $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+                        </div>
+
+                        <div style="margin-bottom:10px;">
+                        {{ Form::button(
+                            'Delete volunteer details', 
+                            array(
+                                'class' => 'btn btn-danger btn-sm',
+                                'data-toggle' => 'modal',
+                                'data-target' => '#modal-details' )) }}
+                        </div>
+                        
+                        {{ Form::close() }}
+
+                    </div>
+                </div>
+                
+            @else
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{ link_to_route(
+                            'volunteer_details.create', 
+                            'Add volunteer details', 
+                            $parameters = array( 'id' => $contact->id), 
+                            $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+                    </div>
+                </div>
+            @endif
+
+            <h3>Record of volunteering</h3>
             
-            {{ Form::close() }}
+            @if ($volunteering_records)
+                <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Leader</th>
+                        <th>Hours</th>
+                        <th>Start Date</th>
+                        <th>Finish Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($volunteering_records as $record)
+                    <tr>
+                        <td>{{{ $record->project }}}</td>
+                        <td>{{{ $record->leader }}}</td>
+                        <td>{{{ number_format($record->hours, 2) . ' hrs' }}}</td>
+                        <td>{{{ $record->start_date }}}</td>
+                        <td>{{{ $record->finish_date }}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            @else
+                <p><i>There are no volunteering records for this contact.</i></p>
+            @endif
 
         </div>
-    </div>
+
+        <div role="tabpanel" class="tab-pane fade" id="guest-details">
+            
+            <h3>Connection cards</h3>
+
+            @if ($contact->connection_cards->count() > 0)
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Connection date</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($contact->connection_cards as $connection_card)
+                        <tr>
+                            <td>{{{ $connection_card->project->name }}}</td>
+                            <td>{{{ $connection_card->connection_date ? $connection_card->connection_date->format('Y-m-d') : '' }}}</td>
+                            <td>{{ link_to_route(
+                                    'connection_card.show', 
+                                    'Show details', 
+                                    $parameters = array( 'id' => $connection_card->id), 
+                                    $attributes = array( 'class' => '')) }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
+            @endif
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ link_to_route(
+                        'connection_card.create', 
+                        'Add a connection card', 
+                        $parameters = array( 'id' => $contact->id), 
+                        $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+                </div>
+            </div>
+
+            <h3>Case notes</h3>
+
+            @if ($contact->case_notes->count() > 0)
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Volunteer</th>
+                            <th>Date</th>
+                            <th>Method</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($contact->case_notes as $case_note)
+                        <tr>
+                            <td>{{{ $case_note->project->name }}}</td>
+                            <td>{{{ $case_note->volunteer }}}</td>
+                            <td>{{{ $case_note->conversation_date ? $case_note->conversation_date->format('Y-m-d') : '' }}}</td>
+                            <td>{{{ $case_note->channel }}}</td>
+                            <td>{{ link_to_route(
+                                    'case_note.show', 
+                                    'Show details', 
+                                    $parameters = array( 'id' => $case_note->id), 
+                                    $attributes = array( 'class' => '')) }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+
+            @endif
+
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ link_to_route(
+                        'case_note.create', 
+                        'Add a case note', 
+                        $parameters = array( 'id' => $contact->id), 
+                        $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+                </div>
+            </div>
+
+            <h3>Record of attendance as a guest</h3>
     
-@else
-    <div class="row">
-        <div class="col-sm-6">
-            {{ link_to_route(
-                'volunteer_details.create', 
-                'Add volunteer details', 
-                $parameters = array( 'id' => $contact->id), 
-                $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
+            @if ($guest_records)
+                <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Leader</th>
+                        <th>Hours</th>
+                        <th>Start Date</th>
+                        <th>Finish Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach ($guest_records as $record)
+                    <tr>
+                        <td>{{{ $record->project }}}</td>
+                        <td>{{{ $record->leader }}}</td>
+                        <td>{{{ number_format($record->hours, 2) . ' hrs' }}}</td>
+                        <td>{{{ $record->start_date }}}</td>
+                        <td>{{{ $record->finish_date }}}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+            @else
+                <p><i>There are no records for this contact attending as a guest.</i></p>
+            @endif
+
         </div>
-    </div>
-@endif
-</div>
 
-
-<div class="col-sm-12">
-    
-    <h3>Guest connection cards</h3>
-
-@if ($contact->connection_cards->count() > 0)
-
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Project</th>
-                <th>Connection date</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach ($contact->connection_cards as $connection_card)
-            <tr>
-                <td>{{{ $connection_card->project->name }}}</td>
-                <td>{{{ $connection_card->connection_date ? $connection_card->connection_date->format('Y-m-d') : '' }}}</td>
-                <td>{{ link_to_route(
-                        'connection_card.show', 
-                        'Show details', 
-                        $parameters = array( 'id' => $connection_card->id), 
-                        $attributes = array( 'class' => '')) }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-@endif
-
-    <div class="row">
-        <div class="col-sm-6">
-            {{ link_to_route(
-                'connection_card.create', 
-                'Add a guest connection card', 
-                $parameters = array( 'id' => $contact->id), 
-                $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
-        </div>
-    </div>
-
-
-</div>
-
-
-<div class="col-sm-12">
-    
-    <h3>Case notes</h3>
-
-@if ($contact->case_notes->count() > 0)
-
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Project</th>
-                <th>Volunteer</th>
-                <th>Date</th>
-                <th>Method</th>
-                <th>Options</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach ($contact->case_notes as $case_note)
-            <tr>
-                <td>{{{ $case_note->project->name }}}</td>
-                <td>{{{ $case_note->volunteer }}}</td>
-                <td>{{{ $case_note->conversation_date ? $case_note->conversation_date->format('Y-m-d') : '' }}}</td>
-                <td>{{{ $case_note->channel }}}</td>
-                <td>{{ link_to_route(
-                        'case_note.show', 
-                        'Show details', 
-                        $parameters = array( 'id' => $case_note->id), 
-                        $attributes = array( 'class' => '')) }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-@endif
-
-    <div class="row">
-        <div class="col-sm-6">
-            {{ link_to_route(
-                'case_note.create', 
-                'Add a case note', 
-                $parameters = array( 'id' => $contact->id), 
-                $attributes = array( 'class' => 'btn btn-primary btn-sm')) }}
-        </div>
     </div>
 
 </div>
 
-
-<div class="col-sm-12">
-
-    <h3>Record of volunteering</h3>
-    
-    @if ($volunteering_records)
-        <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Project</th>
-                <th>Leader</th>
-                <th>Hours</th>
-                <th>Start Date</th>
-                <th>Finish Date</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach ($volunteering_records as $record)
-            <tr>
-                <td>{{{ $record->project }}}</td>
-                <td>{{{ $record->leader }}}</td>
-                <td>{{{ number_format($record->hours, 2) . ' hrs' }}}</td>
-                <td>{{{ $record->start_date }}}</td>
-                <td>{{{ $record->finish_date }}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-    @else
-        <p><i>There are no volunteering records for this contact.</i></p>
-    @endif
-
-</div>
-
-
-<div class="col-sm-12">
-
-    <h3>Record of attendance as a guest</h3>
-    
-    @if ($guest_records)
-        <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th>Project</th>
-                <th>Leader</th>
-                <th>Hours</th>
-                <th>Start Date</th>
-                <th>Finish Date</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach ($guest_records as $record)
-            <tr>
-                <td>{{{ $record->project }}}</td>
-                <td>{{{ $record->leader }}}</td>
-                <td>{{{ number_format($record->hours, 2) . ' hrs' }}}</td>
-                <td>{{{ $record->start_date }}}</td>
-                <td>{{{ $record->finish_date }}}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-    @else
-        <p><i>There are no records for this contact attending as a guest.</i></p>
-    @endif
-
-</div>
 
 
 <div id="modal" class="modal fade" tabindex="-1" role="dialog">
@@ -429,6 +378,14 @@
     $('#continue-details').click(function() {
         $('form#delete_details').submit();
     });
+
+@if (Input::has('guest-details'))
+
+    $(function () {
+        $('#guest-details-tab-link').tab('show')
+    })
+
+@endif
     
 </script>
 

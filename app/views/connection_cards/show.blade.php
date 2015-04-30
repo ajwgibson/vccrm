@@ -1,7 +1,7 @@
 
-<div class="col-sm-6">
+<div class="col-sm-9">
     <h3>Project details</h3>
-    <dl class="dl-horizontal">
+    <dl class="dl-vertical">
 
         <dt>Project</dt>
         <dd>{{{ $connection_card->project->name }}}&nbsp;</dd>
@@ -13,12 +13,12 @@
         <dd>{{{ $connection_card->volunteer }}}&nbsp;</dd>
 
         <dt>How did the guest hear about the project?</dt>
-        <dd>{{{ $connection_card->heard_about }}}&nbsp;</dd>
+        <dd class="pre">{{{ $connection_card->heard_about }}}&nbsp;</dd>
 
     </dl>
 
     <h3>Personal circumstances</h3>
-    <dl class="dl-horizontal">
+    <dl class="dl-vertical">
 
         <dt>Low income</dt>
         <dd>{{{ $connection_card->low_income ? 'Yes' : 'No' }}}&nbsp;</dd>
@@ -48,12 +48,12 @@
         <dd>{{{ $connection_card->relationship_breakdown ? 'Yes' : 'No' }}}&nbsp;</dd>
 
         <dt>Notes</dt>
-        <dd>{{{ $connection_card->notes }}}&nbsp;</dd>
+        <dd class="pre">{{{ $connection_card->notes }}}&nbsp;</dd>
 
     </dl>
 
     <h3>Family circumstances</h3>
-    <dl class="dl-horizontal">
+    <dl class="dl-vertical">
 
         <dt>Marital status</dt>
         <dd>{{{ $connection_card->marital_status }}}&nbsp;</dd>
@@ -67,21 +67,21 @@
     </dl>
 
     <h3>Suggested next steps</h3>
-    <dl class="dl-horizontal">
+    <dl class="dl-vertical">
 
         <dt>#1</dt>
-        <dd>{{{ $connection_card->next_steps_1 }}}&nbsp;</dd>
+        <dd class="pre">{{{ $connection_card->next_steps_1 }}}&nbsp;</dd>
 
         <dt>#2</dt>
-        <dd>{{{ $connection_card->next_steps_2 }}}&nbsp;</dd>
+        <dd class="pre">{{{ $connection_card->next_steps_2 }}}&nbsp;</dd>
 
         <dt>#3</dt>
-        <dd>{{{ $connection_card->next_steps_3 }}}&nbsp;</dd>
+        <dd class="pre">{{{ $connection_card->next_steps_3 }}}&nbsp;</dd>
 
     </dl>
 
     <h3>Additional contact information</h3>
-    <dl class="dl-horizontal">
+    <dl class="dl-vertical">
 
         <dt>OK to contact?</dt>
         <dd>{{{ $connection_card->can_contact ? 'Yes' : 'No' }}}&nbsp;</dd>
@@ -110,7 +110,7 @@
     </dl>
 
     <h3>Signature details</h3>
-    <dl class="dl-horizontal">
+    <dl class="dl-vertical">
         
         <dt>Card signed?</dt>
         <dd>{{{ $connection_card->card_signed ? 'Yes' : 'No' }}}&nbsp;</dd>
@@ -122,13 +122,21 @@
 
 </div>
 
-<div class="col-sm-6">
+<div class="col-sm-3">
 
     {{ Form::open(
         array(
             'method' => 'DELETE', 
             'route' => array('connection_card.destroy', $connection_card->id),
             'class' => 'delete' ) ) }}
+
+    <div style="margin-bottom:10px;">
+        {{ link_to_route(
+            'contact.show', 
+            'Back to contact', 
+            $parameters = array( 'id' => $connection_card->contact_id, 'guest-details' => true), 
+            $attributes = array( 'class' => 'btn btn-default')) }}
+    </div>
 
     <div style="margin-bottom:10px;">
         {{ link_to_route(

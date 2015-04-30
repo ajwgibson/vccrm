@@ -40,9 +40,16 @@ fieldset {
   margin-bottom: 30px;
 }
 
-dd {
-  margin-left: 20px;
-  margin-bottom: 10px;
+.dl-vertical dt {
+  margin-top: 10px;
+}
+
+.dl-vertical dd {
+  margin-left: 10px;
+}
+
+.dl-horizontal {
+  margin-bottom: 40px;
 }
 
 .subtitle small {
@@ -77,4 +84,19 @@ canvas {
   a[href]:after {
     content: none !important;
   }
+}
+
+.tab-content {
+    border-left:   1px solid #ddd;
+    border-right:  1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+
+.pre {
+  white-space: pre-wrap;
 }

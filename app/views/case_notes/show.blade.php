@@ -15,7 +15,7 @@
         <dd>{{{ $case_note->channel }}}&nbsp;</dd>
 
         <dt>Notes</dt>
-        <dd>{{{ $case_note->notes }}}&nbsp;</dd>
+        <dd class="pre">{{{ $case_note->notes }}}&nbsp;</dd>
 
     </dl>
 
@@ -33,7 +33,7 @@
         {{ link_to_route(
             'contact.show', 
             'Back to contact', 
-            $parameters = array( 'id' => $case_note->contact_id), 
+            $parameters = array( 'id' => $case_note->contact_id, 'guest-details' => true), 
             $attributes = array( 'class' => 'btn btn-default')) }}
     </div>
 
