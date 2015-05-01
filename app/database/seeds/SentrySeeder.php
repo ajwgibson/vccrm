@@ -49,6 +49,7 @@ class SentrySeeder extends Seeder {
                 'contact.*' => 1,
                 'volunteer_details.*' => 1,
                 'connection_card.*' => 1,
+                'case_note.*' => 1,
             ),
         ));
 
