@@ -22,6 +22,7 @@ class SentrySeeder extends Seeder {
                 'account.*' => 1,
                 'attendance_record.*' => 1,
                 'project.roles' => 1,
+                'report.*' => 1,
             ),
         ));
 

@@ -9,6 +9,8 @@
 // Protected Routes
 Route::group(array('before' => 'sentry'), function()
 {
+    $year = '\d{4}';
+
 	Route::get('/', array('as' => 'home', 'uses' => 'HomeController@index'));
 
 	// Account management pages
@@ -69,6 +71,8 @@ Route::group(array('before' => 'sentry'), function()
     Route::get('attendance_record/export',     array('as' => 'attendance_record.export', 'uses' => 'AttendanceRecordController@export'));
     Route::resource('attendance_record', 'AttendanceRecordController');
 
+    // Reports
+    Route::get('report/dsd/{year?}', array('as' => 'report.dsd', 'uses' => 'ReportController@dsd'))->where(array('year' => $year));
 });
 
 

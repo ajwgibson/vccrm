@@ -66,6 +66,12 @@
                             <li class="{{ strpos(Route::currentRouteName(), 'user') === 0 ? 'active' : '' }}">{{ link_to_route('user.index', 'Users') }}</li>
                         @endif
                         <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li>{{ link_to_route('report.dsd', 'DSD report') }}</li>
+                          </ul>
+                        </li>
+                        <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ HTML::username() }} <b class="caret"></b></a>
                           <ul class="dropdown-menu">
                             <li>{{ link_to_route('account.editPassword', 'Change my password') }}</li>

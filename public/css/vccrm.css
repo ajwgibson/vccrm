@@ -100,3 +100,18 @@ canvas {
 .pre {
   white-space: pre-wrap;
 }
+
+table.report-dsd tbody tr.no-border td {
+  border-top: 0;
+}
+
+table.report-dsd tbody tr.totals td {
+  font-style: italic;
+  font-weight: bold;
+}
+
+table.report-dsd tbody tr.month-name td {
+  font-style: italic;
+  font-weight: bold;
+}
+
