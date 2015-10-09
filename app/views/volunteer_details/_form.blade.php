@@ -155,6 +155,21 @@
 
     </fieldset>
 
+    <fieldset>
+        
+        <legend>Supported volunteering</legend>
+
+        <p><em>Some of our volunteers are "supported", please confirm...</em></p>
+        <div class="form-group">
+            {{ Form::label('', 'Supported volunteer', array ('class' => 'col-sm-2 control-label')) }}
+            <div class="col-sm-offset-2">
+                <label class="checkbox-inline">{{ Form::radio('supported', true) }} Yes</label>
+                <label class="checkbox-inline">{{ Form::radio('supported', false) }} No</label>
+            </div>
+        </div>
+
+    </fieldset>
+
     <div class="form-group">
         <div class="col-sm-offset-2">
             {{ Form::submit($button, array ('class' => 'btn btn-primary')) }} 

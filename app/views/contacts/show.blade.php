@@ -126,7 +126,10 @@
                             <dd class="pre">{{{ $contact->volunteer_details->notes }}}</dd>
 
                             <dt>Vineyard Compassion volunteer?</dt>
-                            <dd>{{{ $contact->volunteer_details->vineyard_compassion ? 'Yes' : 'No' }}}</dd> &nbsp;
+                            <dd>{{{ $contact->volunteer_details->vineyard_compassion ? 'Yes' : 'No' }}}</dd>
+
+                            <dt>Supported volunteer?</dt>
+                            <dd>{{{ $contact->volunteer_details->supported ? 'Yes' : 'No' }}}</dd> &nbsp;
 
                         </dl>
                     </div>

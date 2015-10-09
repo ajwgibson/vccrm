@@ -14,7 +14,8 @@ class VolunteerDetailsController extends \BaseController {
 		$contact = Contact::findOrFail($id);
 
 		$volunteer_details = new VolunteerDetails();
-		$volunteer_details->vineyard_compassion = true;		// Default to true
+        $volunteer_details->vineyard_compassion = true;     // Default to true
+		$volunteer_details->supported = false;		        // Default to false
 
 		$this->layout->with('title', $this->title);
         $this->layout->with('subtitle', "add volunteer details for {$contact->name}");
